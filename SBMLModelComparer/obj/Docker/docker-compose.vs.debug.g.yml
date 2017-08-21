@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  compareapi:
+    image: compareapi:dev
+    build:
+      args:
+        source: obj/Docker/empty/
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+    volumes:
+      - C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI:/app
+      - C:\Users\Luciano\vsdbg:/remote_debugger:ro
+      - C:\Users\Luciano\.nuget\packages\:/root/.nuget/packages:ro
+      - C:\Users\Luciano\.nuget\packages\:/root/.nuget/fallbackpackages:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp1.1/CompareAPI.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""

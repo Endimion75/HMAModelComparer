@@ -1,0 +1,14 @@
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\wwwroot\SBMLModels\HMR_2_0.xml
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\CompareAPI.deps.json
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\CompareAPI.runtimeconfig.json
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\CompareAPI.runtimeconfig.dev.json
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\CompareAPI.dll
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\CompareAPI.pdb
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\Compare.dll
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\Compare.pdb
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.csprojResolveAssemblyReference.cache
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.csproj.CoreCompileInputs.cache
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.AssemblyInfoInputs.cache
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.AssemblyInfo.cs
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.dll
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.pdb
