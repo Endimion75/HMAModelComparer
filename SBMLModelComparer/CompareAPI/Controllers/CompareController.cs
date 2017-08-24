@@ -9,13 +9,15 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CompareAPI.Controllers
 {
     [Route("api/[controller]")]
     public class CompareController : Controller
     {
-        private IHostingEnvironment Env { get; }
+        private readonly ILogger<CompareController> _logger;
+        private readonly IHostingEnvironment _environment;
 
         public class ModelsPost
         {
@@ -23,6 +25,16 @@ namespace CompareAPI.Controllers
 
             public IFormFile FileModelB { get; set; }
             //public IFormFile FileBaseModel { get; set; }
+
+            public int NumberOfFiles()
+            {
+                var count = 0;
+                if (FileModelA != null)
+                    count += 1;
+                if (FileModelB != null)
+                    count += 1;
+                return count;
+            }
         }
 
         private class UploadedFile
@@ -48,9 +60,10 @@ namespace CompareAPI.Controllers
             BaseModel
         }
 
-        public CompareController(IHostingEnvironment env)
+        public CompareController(IHostingEnvironment env, ILogger<CompareController> logger)
         {
-            Env = env;
+            _logger = logger;
+            _environment = env;
         }
 
         // GET: api/Compare
@@ -67,31 +80,38 @@ namespace CompareAPI.Controllers
             var tempUploadedModelList = new List<UploadedFile>();
             try
             {
-                Console.WriteLine("You received the call!");
+                _logger.LogInformation($"Post requested with: {modelsPost.NumberOfFiles()} files");
 
+                _logger.LogInformation("Creating Model A temp file");
                 var modelAFilePath = await CreateTempUploadedFile(modelsPost.FileModelA);
                 if (modelAFilePath != string.Empty)
                     tempUploadedModelList.Add(new UploadedFile(modelsPost.FileModelA.FileName, modelAFilePath, ModelFileName.ModelA));
                 else
                     return BadRequest("Problems loading the Model A file!");
 
+                _logger.LogInformation("Creating Model B temp file");
                 var modelBFilePath = await CreateTempUploadedFile(modelsPost.FileModelB);
                 if (modelBFilePath != string.Empty)
                     tempUploadedModelList.Add(new UploadedFile(modelsPost.FileModelB.FileName, modelBFilePath, ModelFileName.ModelB));
                 else
                     return BadRequest("Problems loading the Model B file!");
 
-                var mappedPath = Path.Combine(Env.WebRootPath, "SBMLModels/HMR_2_0.xml");
+                var mappedPath = Path.Combine(_environment.WebRootPath, "SBMLModels/HMR_2_0.xml");
                 tempUploadedModelList.Add(new UploadedFile(mappedPath, mappedPath, ModelFileName.BaseModel));
-                
+
+                _logger.LogInformation("Comparaing Models");
                 var jsonOut = GetModelComparionResult(tempUploadedModelList);
 
+                _logger.LogInformation("Cleaning Temp files");
                 CleanTempUploadedFiles(tempUploadedModelList);
 
+
+                _logger.LogInformation("Returning Comparison Json");
                 return Ok(jsonOut);
             }
             catch (Exception exp)
             {
+                _logger.LogError("There was a problem during the comparison of the Models!");
                 Console.WriteLine("Exception generated when uploading files - " + exp.Message);
                 CleanTempUploadedFiles(tempUploadedModelList);
                 string message = $"file / upload failed!";
