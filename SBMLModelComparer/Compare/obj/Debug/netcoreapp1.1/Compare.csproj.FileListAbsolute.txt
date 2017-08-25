@@ -6,3 +6,4 @@ C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\Compare\obj\De
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\Compare\obj\Debug\netcoreapp1.1\Compare.AssemblyInfo.cs
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\Compare\obj\Debug\netcoreapp1.1\Compare.dll
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\Compare\obj\Debug\netcoreapp1.1\Compare.pdb
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\Compare\obj\Debug\netcoreapp1.1\Compare.csprojResolveAssemblyReference.cache

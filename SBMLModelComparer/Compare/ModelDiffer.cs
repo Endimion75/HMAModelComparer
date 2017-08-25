@@ -16,8 +16,6 @@ namespace Compare
             var b = SBMLParser.CalculateStats(fileStreamB, compartmentCatalouge);
             var modelB = SBMLParser.GetModelDetails(fileStreamB, originalPathB);
             modelB.TotalReactions = b.Count;
-            //var modelBackground = SBMLParser.CalculateStats("data\\base.xml", compartmentCatalouge);
-
 
             var models = new Dictionary<string, Model> { { "A", modelA }, { "B", modelB } };
             var stats = new ComparedStatistics();
@@ -27,7 +25,6 @@ namespace Compare
 
             var combined = new ModelComparisonResult(diff, stats, models);
 
-            //var jsonOut = Newtonsoft.Json.JsonConvert.SerializeObject(combined);
             return combined;
 
         }
@@ -68,16 +65,13 @@ namespace Compare
             if (!same)
             {
                 stats.RecordShareReaction(aReaction.Subsystem, aReaction.Compartments);
-                var newComparedReaction = new AffectedReaction
+                var newComparedReaction = new AffectedModifiedReaction
                 {
                     ReactionId = aReaction.ReactionId,
                     Compartments = aReaction.Compartments,
-                    FoundInA = true,
-                    FoundInB = true,
-                    Importance = "low",
-                    Subsystem = aReaction.Subsystem
+                    Subsystem = aReaction.Subsystem,
+                    ModifierDiferenceses = new ModifierDifferences(aMissingInB, bMissingInA)
                 };
-                newComparedReaction.ModifierDiferenceses = new ModifierDifferences(aMissingInB, bMissingInA);
                 diff.Add(newComparedReaction);
             }
             else
@@ -87,15 +81,13 @@ namespace Compare
         private static void AddHighPriorityDifferenceAOnly(List<AffectedReaction> diff, ComparedStatistics stats, Reaction aReaction)
         {
             stats.RecordReactionOnlyInA(aReaction.Subsystem, aReaction.Compartments);
-            var newComparedReaction = new AffectedReaction
+            var newComparedReaction = new AffectedLostReaction
             {
                 ReactionId = aReaction.ReactionId,
                 Compartments = aReaction.Compartments,
                 FoundInA = true,
                 FoundInB = false,
-                Importance = "high",
                 Subsystem = aReaction.Subsystem,
-                ModifierDiferenceses = null
             };
             diff.Add(newComparedReaction);
         }
@@ -103,15 +95,13 @@ namespace Compare
         private static void AddHighPriorityDifferenceBOnly(List<AffectedReaction> diff, ComparedStatistics stats, Reaction bReaction)
         {
             stats.RecordReactionOnlyInB(bReaction.Subsystem, bReaction.Compartments);
-            var newComparedReaction = new AffectedReaction
+            var newComparedReaction = new AffectedLostReaction
             {
                 ReactionId = bReaction.ReactionId,
                 Compartments = bReaction.Compartments,
                 FoundInA = false,
                 FoundInB = true,
-                Importance = "high",
                 Subsystem = bReaction.Subsystem,
-                ModifierDiferenceses = null
             };
             diff.Add(newComparedReaction);
         }

@@ -11,29 +11,25 @@ namespace Compare.DataModels
 
         public ComparedStatistics Summary { get; set; }
         
-        public Dictionary<string, List<AffectedReaction>> AffectedReactions { get; set; }
+        public Reactions AffectedReactions { get; set; }
         
         public ModelComparisonResult(List<AffectedReaction> reactions, ComparedStatistics statistics, Dictionary<string, Model> models)
         {
             Summary = statistics;
             Models = models;
-            AffectedReactions = new Dictionary<string, List<AffectedReaction>>
-            {
-                {"LostReactions", new List<AffectedReaction>()},
-                { "VariousModifiers", new List<AffectedReaction>()}
-            };
+            AffectedReactions = new Reactions();
             foreach (var reaction in reactions)
             {
-                if (reaction.Importance == "low")
-                    AffectedReactions["VariousModifiers"].Add(reaction);
-                else if(reaction.Importance == "high")
-                    AffectedReactions["LostReactions"].Add(reaction);
+                if (reaction is AffectedModifiedReaction)
+                    AffectedReactions.VariousModifiers.Add((AffectedModifiedReaction) reaction);
+                else if(reaction is AffectedLostReaction)
+                    AffectedReactions.LostReactions.Add((AffectedLostReaction) reaction);
             }
         }
 
         public ModelComparisonResult()
         {
-            AffectedReactions = new Dictionary<string, List<AffectedReaction>>();
+            AffectedReactions = new Reactions();
             Summary = new ComparedStatistics();
             Models = new Dictionary<string, Model>();
         }

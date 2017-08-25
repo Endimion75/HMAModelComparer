@@ -1,0 +1,1 @@
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\obj\Release\docker-compose.dcproj.CoreCompileInputs.cache

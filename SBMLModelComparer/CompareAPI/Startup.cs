@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CompareAPI
 {
@@ -29,16 +31,22 @@ namespace CompareAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddCors(o => o.AddPolicy("MyCrossPolicy", builder => 
-                           builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            services.AddCors(o => o.AddPolicy("MyCrossPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
+            //Also look at the Web.config
+            var increaseFactor = 2;
             services.Configure<FormOptions>(options =>
             {
-                options.ValueLengthLimit = options.ValueLengthLimit * 2;
-                options.MultipartBodyLengthLimit = options.MultipartBodyLengthLimit * 2;
-                options.MultipartHeadersLengthLimit = options.MultipartHeadersLengthLimit * 2;
+                options.ValueLengthLimit = options.ValueLengthLimit * increaseFactor;
+                options.MultipartBodyLengthLimit = options.MultipartBodyLengthLimit * increaseFactor;
+                options.MultipartHeadersLengthLimit = options.MultipartHeadersLengthLimit * increaseFactor;
             });
-            services.AddMvc();
+
+            //This controls how the json serializer names the field names E.g. Id => id;
+            //.AddJsonOptions(o=>o.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            //If you want to remove it just use:
+            //services.AddMvc();
+            services.AddMvc().AddJsonOptions(o => o.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
