@@ -6,10 +6,10 @@ namespace Compare.DataModels
 {
     public class AffectedModifiedReaction : AffectedReaction
     {
-        public ModifierDifferences ModifierDiferenceses { get; set; }
+        public ModifierDifferences ModifierDifferences { get; set; }
         public AffectedModifiedReaction()
         {
-            ModifierDiferenceses = new ModifierDifferences();
+            ModifierDifferences = new ModifierDifferences();
         }
     }
 }

@@ -12,15 +12,18 @@ namespace Compare.DataModels
     }
     public class ComparedStatistics
     {
+        public int ReactionsOnlyInA { get; set; }
+
+        public int ReactionsOnlyInB { get; set; }
+
+        public int SharedReactions { get; set; }
+
+        public int DifferentModifiers { get; set; }
+
         public Dictionary<string, ChangeType> AffectedSubsystems { get; set; }
 
         public Dictionary<string, ChangeType> AffectedCompartments { get; set; }
 
-        public int SharedReactions { get; set; }
-
-        public int ReactionsOnlyInA { get; set; }
-
-        public int ReactionsOnlyInB { get; set; }
 
         public ComparedStatistics()
         {
@@ -29,13 +32,21 @@ namespace Compare.DataModels
             ReactionsOnlyInA = 0;
             ReactionsOnlyInB = 0;
             SharedReactions = 0;
+            DifferentModifiers = 0;
         }
 
-        public void RecordShareReaction(string subsystem, List<string> compartments)
+        public void RecordDifferentModifiers(string subsystem, List<string> compartments)
         {
-            IncreaseSharedReaction();
+            IncreaseDifferentModifiers();
             AddAffectedsubsystem(subsystem, TypeOfChange.DifferentModifiers);
             AddAffectedCompartment(compartments, TypeOfChange.DifferentModifiers);
+        }
+
+        public void RecordShareReactions()//string subsystem, List<string> compartments)
+        {
+            IncreaseSharedReactions();
+            //AddAffectedsubsystem(subsystem, TypeOfChange.DifferentModifiers);
+            //AddAffectedCompartment(compartments, TypeOfChange.DifferentModifiers);
         }
 
         public void RecordReactionOnlyInA(string subsystem, List<string> compartments)
@@ -117,7 +128,12 @@ namespace Compare.DataModels
             ReactionsOnlyInB += 1;
         }
 
-        private void IncreaseSharedReaction()
+        private void IncreaseDifferentModifiers()
+        {
+            DifferentModifiers += 1;
+        }
+
+        private void IncreaseSharedReactions()
         {
             SharedReactions += 1;
         }

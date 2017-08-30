@@ -96,7 +96,10 @@ namespace CompareAPI.Controllers
                 else
                     return BadRequest("Problems loading the Model B file!");
 
+                //To be used only when testing the mock models
+                //var mappedPath = Path.Combine(_environment.WebRootPath, "SBMLModels/ModelBase.xml");
                 var mappedPath = Path.Combine(_environment.WebRootPath, "SBMLModels/HMR_2_0.xml");
+
                 tempUploadedModelList.Add(new UploadedFile(mappedPath, mappedPath, ModelFileName.BaseModel));
 
                 _logger.LogInformation("Comparaing Models");

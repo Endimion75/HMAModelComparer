@@ -10,7 +10,7 @@ namespace Compare
 {
     public static class SBMLParser
     {
-        public static List<Reaction> CalculateStats(FileStream fileStream, List<Compartment> compartmentCatalogue)
+        public static List<Reaction> GetReactions(FileStream fileStream, List<Compartment> compartmentCatalogue)
         {
             var doc = XDocument.Load(fileStream);
 

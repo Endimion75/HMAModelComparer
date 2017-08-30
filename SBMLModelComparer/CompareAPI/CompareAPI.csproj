@@ -31,6 +31,9 @@
     <Content Update="wwwroot\SBMLModels\HMR_2_0.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\SBMLModels\ModelBase.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

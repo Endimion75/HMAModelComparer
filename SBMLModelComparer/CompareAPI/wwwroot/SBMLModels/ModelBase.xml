@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version3" level="2" version="3">
+	<model metaid="metaid_INITModel" id="Base" name="Base">
+		<notes>
+			<body xmlns="http://www.w3.org/1999/xhtml">This file was generated using the exportModel function in RAVEN Toolbox</body>
+		</notes>
+		<listOfCompartments>
+			<compartment metaid="metaid_a" id="C_a" name="Compartment A" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_b" id="C_b" name="Compartment B" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_c" id="C_c" name="Compartment C" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_d" id="C_d" name="Compartment D" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+		</listOfCompartments>
+	</model>
+</sbml>

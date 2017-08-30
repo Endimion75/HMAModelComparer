@@ -12,3 +12,4 @@ C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.AssemblyInfo.cs
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.dll
 C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\obj\Debug\netcoreapp1.1\CompareAPI.pdb
+C:\Users\Luciano\Desktop\SBML\SBMLModelComparer\SBMLModelComparer\CompareAPI\bin\Debug\netcoreapp1.1\wwwroot\SBMLModels\ModelBase.xml

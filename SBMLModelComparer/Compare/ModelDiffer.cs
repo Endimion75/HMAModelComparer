@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Compare.DataModels;
@@ -10,35 +11,47 @@ namespace Compare
         public static ModelComparisonResult GetModelDiferences(FileStream fileStreamA, string originalPathA, FileStream fileStreamB, string originalPathB, FileStream baseFileStream, string originalPathBase)
         {
             var compartmentCatalouge = SBMLParser.GetCompartmentCatalouge(baseFileStream);
-            var a = SBMLParser.CalculateStats(fileStreamA, compartmentCatalouge);
-            var modelA = SBMLParser.GetModelDetails(fileStreamA, originalPathA);
-            modelA.TotalReactions = a.Count;
-            var b = SBMLParser.CalculateStats(fileStreamB, compartmentCatalouge);
-            var modelB = SBMLParser.GetModelDetails(fileStreamB, originalPathB);
-            modelB.TotalReactions = b.Count;
 
-            var models = new Dictionary<string, Model> { { "A", modelA }, { "B", modelB } };
+            var reactionsFromModelA = SBMLParser.GetReactions(fileStreamA, compartmentCatalouge);
+            var reactionsFromModelB = SBMLParser.GetReactions(fileStreamB, compartmentCatalouge);
+            var totalReactionsModelA = reactionsFromModelA.Count;
+            var totalReactionsModelB = reactionsFromModelB.Count;
+
             var stats = new ComparedStatistics();
-            var diff = new List<AffectedReaction>();
+            var diff = GetDifferences(reactionsFromModelA, reactionsFromModelB, ref stats);
+            var models = GetModelDicitionary(fileStreamA, originalPathA, fileStreamB, originalPathB, totalReactionsModelA, totalReactionsModelB, stats);
 
-            diff = GetDifferences(a, b, ref stats);
+            var modelComparisonResult = new ModelComparisonResult(diff, stats, models);
 
-            var combined = new ModelComparisonResult(diff, stats, models);
-
-            return combined;
-
+            return modelComparisonResult;
         }
-        
+
+        private static Dictionary<string, Model> GetModelDicitionary(FileStream fileStreamA, string originalPathA, FileStream fileStreamB, string originalPathB, int totalReactionsModelA, int totalReactionsModelB, ComparedStatistics stats)
+        {
+            var modelA = GetModel(fileStreamA, originalPathA, totalReactionsModelA, stats);
+            var modelB = GetModel(fileStreamB, originalPathB, totalReactionsModelB, stats);
+            var models = new Dictionary<string, Model> { { "A", modelA }, { "B", modelB } };
+            return models;
+        }
+
+        private static Model GetModel(FileStream fileStream, string originalPath, int totalReactions, ComparedStatistics stats)
+        {
+            var model = SBMLParser.GetModelDetails(fileStream, originalPath);
+            model.TotalReactions = totalReactions;
+            model.PercentSharedIdenticalReactions = ((float) stats.SharedReactions / model.TotalReactions) * 100;
+            model.PercentSharedReactions = (((float) stats.SharedReactions + stats.DifferentModifiers) / model.TotalReactions) * 100;
+            return model;
+        }
+
         private static List<AffectedReaction> GetDifferences(List<Reaction> modelA, List<Reaction> modelB, ref ComparedStatistics stats)
         {
             var diff = new List<AffectedReaction>();
-            var sameCount = 0;
             foreach (var aReaction in modelA)
             {
                 var bReaction = modelB.FirstOrDefault(r => r.ReactionId == aReaction.ReactionId);
                 if (bReaction != null)
                 {
-                    AddLowPriorityDifferece(aReaction, bReaction, ref diff, ref stats, ref sameCount);
+                    AddLowPriorityDifferece(aReaction, bReaction, ref diff, ref stats);
                     modelB.Remove(bReaction);
                 }
                 else
@@ -49,7 +62,7 @@ namespace Compare
             {
                 var aReaction = modelA.FirstOrDefault(r => r.ReactionId == bReaction.ReactionId);
                 if (aReaction != null)
-                    AddLowPriorityDifferece(aReaction, bReaction, ref diff, ref stats, ref sameCount);
+                    AddLowPriorityDifferece(aReaction, bReaction, ref diff, ref stats);
                 else
                     AddHighPriorityDifferenceBOnly(diff, stats, bReaction);
             }
@@ -57,25 +70,25 @@ namespace Compare
             return diff;
         }
 
-        private static void AddLowPriorityDifferece(Reaction aReaction, Reaction bReaction, ref List<AffectedReaction> diff, ref ComparedStatistics stats, ref int sameCount)
+        private static void AddLowPriorityDifferece(Reaction aReaction, Reaction bReaction, ref List<AffectedReaction> diff, ref ComparedStatistics stats)
         {
             var aMissingInB = aReaction.Modifiers.Except(bReaction.Modifiers).ToList();
             var bMissingInA = bReaction.Modifiers.Except(aReaction.Modifiers).ToList();
             var same = !aMissingInB.Any() && !bMissingInA.Any();
             if (!same)
             {
-                stats.RecordShareReaction(aReaction.Subsystem, aReaction.Compartments);
+                stats.RecordDifferentModifiers(aReaction.Subsystem, aReaction.Compartments);
                 var newComparedReaction = new AffectedModifiedReaction
                 {
                     ReactionId = aReaction.ReactionId,
                     Compartments = aReaction.Compartments,
                     Subsystem = aReaction.Subsystem,
-                    ModifierDiferenceses = new ModifierDifferences(aMissingInB, bMissingInA)
+                    ModifierDifferences = new ModifierDifferences(aMissingInB, bMissingInA)
                 };
                 diff.Add(newComparedReaction);
             }
             else
-                sameCount++;
+                stats.RecordShareReactions();
         }
 
         private static void AddHighPriorityDifferenceAOnly(List<AffectedReaction> diff, ComparedStatistics stats, Reaction aReaction)
