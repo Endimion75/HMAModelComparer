@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version3" level="2" version="3">
+	<model metaid="metaid_INITModel" id="ModelA" name="Model A">
+		<notes>
+			<body xmlns="http://www.w3.org/1999/xhtml">This file was generated using the exportModel function in RAVEN Toolbox</body>
+		</notes>
+		<listOfCompartments>
+			<compartment metaid="metaid_a" id="C_a" name="Compartment A" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_b" id="C_b" name="Compartment B" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_c" id="C_c" name="Compartment C" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+			<compartment metaid="metaid_d" id="C_d" name="Compartment D" outside="C_x" spatialDimensions="3" size="1" sboTerm="SBO:0000290">
+			</compartment>
+		</listOfCompartments>
+		<listOfSpecies>
+			<species metaid="metaid_M_m00001a" id="M_m00001a" name="Species1" compartment="C_a" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 1</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00002a" id="M_m00002a" name="Species2" compartment="C_a" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 2</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001b" id="M_m00003b" name="Species3" compartment="C_b" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 3</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001c" id="M_m00004c" name="Species4" compartment="C_c" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 4</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001c" id="M_m00005c" name="Species5" compartment="C_c" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 5</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="M_m00006d" name="Species6" compartment="C_d" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 6</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="M_m00007b" name="Species7" compartment="C_d" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 7</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="M_m00008d" name="Species8" compartment="C_d" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Species 8</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="E_1" name="Modifier1" compartment="C_a" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Mod 1</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="E_2" name="Modifier2" compartment="C_a" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Mod 2</p>
+					</body>
+				</notes>
+			</species>
+			<species metaid="metaid_M_m00001d" id="E_3" name="Modifier3" compartment="C_a" initialAmount="0" boundaryCondition="false" sboTerm="SBO:0000299">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>Mod 3</p>
+					</body>
+				</notes>
+			</species>
+		</listOfSpecies>
+		<listOfReactions>
+			<reaction metaid="metaid_1" id="R1" name="" reversible="false" sboTerm="SBO:0000176">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>SUBSYSTEM: A</p>
+					</body>
+				</notes>
+				<listOfReactants>
+					<speciesReference species="M_m00001a" stoichiometry="1"/>
+					<speciesReference species="M_m00002a" stoichiometry="1"/>
+				</listOfReactants>
+				<listOfProducts>
+					<speciesReference species="M_m00003b" stoichiometry="1"/>
+				</listOfProducts>
+				<listOfModifiers>
+					<modifierSpeciesReference species="E_1" />
+				</listOfModifiers>
+			</reaction>
+
+			<reaction metaid="metaid_1" id="R3" name="" reversible="false" sboTerm="SBO:0000176">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>SUBSYSTEM: C</p>
+					</body>
+				</notes>
+				<listOfReactants>
+					<speciesReference species="M_m00004c" stoichiometry="1"/>
+					<speciesReference species="M_m00005c" stoichiometry="1"/>
+				</listOfReactants>
+				<listOfProducts>
+					<speciesReference species="M_m00006d" stoichiometry="1"/>
+				</listOfProducts>
+				<listOfModifiers>
+					<modifierSpeciesReference species="E_3" />
+				</listOfModifiers>
+			</reaction>
+			<reaction metaid="metaid_1" id="R4" name="" reversible="false" sboTerm="SBO:0000176">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>SUBSYSTEM: B</p>
+					</body>
+				</notes>
+				<listOfReactants>
+					<speciesReference species="M_m00004c" stoichiometry="1"/>
+					<speciesReference species="M_m00005c" stoichiometry="1"/>
+				</listOfReactants>
+				<listOfProducts>
+					<speciesReference species="M_m00006d" stoichiometry="1"/>
+				</listOfProducts>
+				<listOfModifiers>
+					<modifierSpeciesReference species="E_3" />
+				</listOfModifiers>
+			</reaction>
+			<reaction metaid="metaid_1" id="R5" name="" reversible="false" sboTerm="SBO:0000176">
+				<notes>
+					<body xmlns="http://www.w3.org/1999/xhtml">
+						<p>SUBSYSTEM: B</p>
+					</body>
+				</notes>
+				<listOfReactants>
+					<speciesReference species="M_m00007b" stoichiometry="1"/>
+					<speciesReference species="M_m00003b" stoichiometry="1"/>
+					<speciesReference species="M_m00004c" stoichiometry="1"/>
+				</listOfReactants>
+				<listOfProducts>
+					<speciesReference species="M_m00005c" stoichiometry="1"/>
+				</listOfProducts>
+				<listOfModifiers>
+					<modifierSpeciesReference species="E_1" />
+				</listOfModifiers>
+			</reaction>
+		</listOfReactions>
+	</model>
+</sbml>

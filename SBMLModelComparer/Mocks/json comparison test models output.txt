@@ -1,0 +1,90 @@
+{
+	"Models": {
+		"A": {
+			"ModelId": "ModelA",
+			"ModelName": "Model A",
+			"File": "ModelA.xml",
+			"TotalReactions": 4,
+			"PercentSharedIdenticalReactions": 25,
+			"PercentSharedReactions": 75
+		},
+		"B": {
+			"ModelId": "ModelB",
+			"ModelName": "Model B",
+			"File": "ModelB.xml",
+			"TotalReactions": 4,
+			"PercentSharedIdenticalReactions": 25,
+			"PercentSharedReactions": 75
+		}
+	},
+	"Summary": {
+		"ReactionsOnlyInA": 1,
+		"ReactionsOnlyInB": 1,
+		"SharedReactions": 1,
+		"DifferentModifiers": 2,
+		"AffectedSubsystems": {
+			"A": {
+				"MissingReactionsFromA": 0,
+				"MissingReactionsFromB": 0,
+				"DifferentModifiers": 0
+			},
+			"B": {
+				"MissingReactionsFromA": 1,
+				"MissingReactionsFromB": 0,
+				"DifferentModifiers": 1
+			}
+		},
+		"AffectedCompartments": {
+			"Compartment A": {
+				"MissingReactionsFromA": 0,
+				"MissingReactionsFromB": 0,
+				"DifferentModifiers": 0
+			},
+			"Compartment C": {
+				"MissingReactionsFromA": 0,
+				"MissingReactionsFromB": 0,
+				"DifferentModifiers": 1
+			},
+			"Compartment B": {
+				"MissingReactionsFromA": 1,
+				"MissingReactionsFromB": 0,
+				"DifferentModifiers": 0
+			}
+		}
+	},
+	"AffectedReactions": {
+		"LostReactions": [{
+			"FoundInA": true,
+			"FoundInB": false,
+			"ReactionId": "R1",
+			"Subsystem": "A",
+			"Compartments": ["Compartment A"]
+		},
+		{
+			"FoundInA": false,
+			"FoundInB": true,
+			"ReactionId": "R2",
+			"Subsystem": "B",
+			"Compartments": ["Compartment B"]
+		}],
+		"VariousModifiers": [{
+			"ModifierDifferences": {
+				"ModifiersInANotInB": [],
+				"ModifiersInBNotInA": ["E_2"]
+			},
+			"ReactionId": "R4",
+			"Subsystem": "B",
+			"Compartments": ["Compartment C"]
+		},
+		{
+			"ModifierDifferences": {
+				"ModifiersInANotInB": ["E_1"],
+				"ModifiersInBNotInA": ["E_2"]
+			},
+			"ReactionId": "R5",
+			"Subsystem": "B",
+			"Compartments": ["Compartment B",
+			"Compartment C"]
+		}]
+	}
+}
